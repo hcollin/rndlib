@@ -125,8 +125,9 @@ export function d100(times?: number): number[] {
  * @param threshold
  * @param pool
  */
-export function successPool(threshold: number, pool: number[]): number {
-    return pool.reduce((sum: number, res: number) => {
+export function successPool(threshold: number, pool: number[]|DiceResults): number {
+    const results: number[] = Array.isArray(pool) ? pool : pool.rolls;
+    return results.reduce((sum: number, res: number) => {
         if (res >= threshold) return sum + 1;
         return sum;
     }, 0);
@@ -137,8 +138,9 @@ export function successPool(threshold: number, pool: number[]): number {
  * @param threshold
  * @param pool
  */
-export function sumPool(pool: number[]): number {
-    return pool.reduce((sum: number, res: number) => {
+export function sumPool(pool: number[]|DiceResults): number {
+    const results: number[] = Array.isArray(pool) ? pool : pool.rolls;
+    return results.reduce((sum: number, res: number) => {
         return sum + res;
     }, 0);
 }

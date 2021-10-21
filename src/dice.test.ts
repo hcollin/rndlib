@@ -70,13 +70,13 @@ describe("Dice Rollers", () => {
 });
 
 describe("Dice Roller", () => {
-
     it("Pure roll", () => {
         const res = roll("2d6");
         expect(res.rolls.length).toBe(2);
         expect(sumPool(res.rolls)).toBe(res.sum);
         expect(res.dieType).toBe(6);
-        
+        expect(res.sum).toBeGreaterThanOrEqual(2);
+        expect(res.sum).toBeLessThanOrEqual(12);
     });
 
     it("Roll with positive bonus", () => {
@@ -84,7 +84,6 @@ describe("Dice Roller", () => {
         expect(res.rolls.length).toBe(4);
         expect(sumPool(res.rolls) + 8).toBe(res.sum);
         expect(res.dieType).toBe(12);
-        
     });
 
     it("Roll with positive bonus", () => {
@@ -92,7 +91,6 @@ describe("Dice Roller", () => {
         expect(res.rolls.length).toBe(3);
         expect(sumPool(res.rolls) - 4).toBe(res.sum);
         expect(res.dieType).toBe(10);
-        
     });
 
     it("Roll a single die", () => {
@@ -103,7 +101,18 @@ describe("Dice Roller", () => {
         expect(res.sum).toBeGreaterThanOrEqual(1);
         expect(res.sum).toBeLessThanOrEqual(20);
     });
-})
+
+    it("Sumpool for dice roller", () => {
+        const res = roll("4d10");
+        expect(res.sum).toBe(sumPool(res));
+    });
+
+    it("Success pool for dice roller", () => {
+        const res = roll("6d10");
+        const sccs = res.rolls.filter((v) => v >= 6).length;
+        expect(successPool(6, res)).toBe(sccs);
+    });
+});
 
 describe("Pool Functions", () => {
     it("Success pool", () => {
@@ -111,6 +120,6 @@ describe("Pool Functions", () => {
     });
 
     it("Sum pool", () => {
-        expect(sumPool([1,2,3,4])).toBe(10);
+        expect(sumPool([1, 2, 3, 4])).toBe(10);
     });
 });
