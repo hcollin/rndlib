@@ -1,61 +1,4 @@
 
-/**
- * Return a random integer number as a string with leading zeroes.
- *
- * If the random values is requested between 1 and 999, following results would be valid:
- *
- *   13 => "013"
- *   123 => "123"
- *
- * @param min number
- * @param max number
- */
-export function prnd(min: number, max: number): string {
-    const num = rnd(min, max);
-    const maxLen = max.toString().length;
-    const numStr: string = num.toString();
-
-    return numStr.padStart(maxLen, "0");
-}
-
-/**
- * Return a random value from the provided array
- *
- * @param arr array<T>
- */
-export function arnd<T>(arr: Array<T>): T {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
-
-/**
- * Return a random values from the provided array
- *
- * @param arr array<T>
- * @param amout number Amount of values to return
- */
-export function arnds<T>(arr: Array<T>, amount: number, unique = false): T[] {
-    if (unique && arr.length <= amount) {
-        return [...arr];
-    }
-    const res: T[] = [];
-    if (!unique) {
-        for (let i: number = 0; i < amount; i++) {
-            if (!unique) {
-                res.push(arnd<T>(arr));
-            }
-        }
-    } else {
-        while (res.length < amount) {
-            const val: T = arnd<T>(arr);
-            if (!res.includes(val)) {
-                res.push(val);
-            }
-        }
-    }
-
-    return res;
-}
-
 export function fnreps<T>(fn: () => T, maxRepeats: number) {
     const reps = rnd(0, maxRepeats);
     const res: T[] = [];
@@ -65,13 +8,6 @@ export function fnreps<T>(fn: () => T, maxRepeats: number) {
     return res;
 }
 
-export function roll(chance: number) {
-    const d100Roll: number = Math.floor(Math.random() * 100);
-    if (chance > d100Roll) {
-        return true;
-    }
-    return false;
-}
 
 export function grnd(mid: number, steps: number, depth: number, minCut?: number, maxCut?: number): number {
     function insideCut(val: number) {
@@ -120,20 +56,6 @@ export function reps(times: number, fn: () => void): void {
     for (let i = 0; i < times; i++) {
         fn();
     }
-}
-
-export function shuffle<T>(arr: T[]): T[] {
-    // const maxLen = arr.length;
-    const copyArr = [...arr];
-    const newArr: T[] = [];
-
-    while (copyArr.length > 0) {
-        const ind = rnd(0, copyArr.length - 1);
-
-        newArr.push(copyArr.splice(ind, 1)[0]);
-    }
-
-    return newArr;
 }
 
 const Characters: string[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890".split("");
