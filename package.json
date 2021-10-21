@@ -1,8 +1,8 @@
 {
     "name": "rndlib",
-    "version": "0.9.1",
+    "version": "0.9.3",
     "description": "Easy to use randomizer functions with TypeScript support",
-    "main": "index.js",
+    "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
         "build": "rollup -c",
