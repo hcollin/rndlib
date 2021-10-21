@@ -6,6 +6,10 @@
  * @param max number
  */
  export function rnd(min: number, max?: number): number {
-    const maxReal = max || 0; 
-    return Math.floor(Math.random() * (maxReal + 1 - min)) + min;
+    const rMin = max !== undefined ? min : 0;
+    const rMax = max !== undefined ? max : min;
+
+    if(rMin > rMax) throw new Error(`Invalid values: Minimum boundary on rnd() cannot be higher than maximum boundary: ${rMin} - ${rMax}`);
+    if(rMin === rMax) return rMin;
+    return Math.floor(Math.random() * (rMax + 1 - rMin)) + rMin;
 }
