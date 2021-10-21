@@ -1,4 +1,5 @@
 import { rnd } from "./rnd";
+import { sumPool } from "./utils";
 
 export interface DiceResults {
     sum: number,
@@ -118,29 +119,3 @@ export function d100(times?: number): number[] {
     return dx(100, times);
 }
 
-// Pools
-
-/**
- * Return the number of results that are equal or higher than threshold
- * @param threshold
- * @param pool
- */
-export function successPool(threshold: number, pool: number[]|DiceResults): number {
-    const results: number[] = Array.isArray(pool) ? pool : pool.rolls;
-    return results.reduce((sum: number, res: number) => {
-        if (res >= threshold) return sum + 1;
-        return sum;
-    }, 0);
-}
-
-/**
- * Return the number of results that are equal or higher than threshold
- * @param threshold
- * @param pool
- */
-export function sumPool(pool: number[]|DiceResults): number {
-    const results: number[] = Array.isArray(pool) ? pool : pool.rolls;
-    return results.reduce((sum: number, res: number) => {
-        return sum + res;
-    }, 0);
-}

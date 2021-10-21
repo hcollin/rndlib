@@ -3,9 +3,10 @@ import { arnd } from "./arnd";
 import { nrnd } from "./nrnd";
 import { shuffle } from "./shuffle";
 import { chance } from "./chance";
-import { d10, d100, d12, d20, d4, d6, d8, DiceResults, roll } from "./dice";
+import { d10, d100, d12, d20, d4, d6, d8, DiceResults, roll} from "./dice";
 import { padrnd } from "./padrnd";
 import { arnds } from "./arnds";
+import { successPool, sumPool } from "./utils";
 
 interface DiceFns {
     d4: (times?: number) => number[];
@@ -29,4 +30,4 @@ const dice: DiceFns = {
     roll,
 };
 
-export { rnd, arnd, arnds, nrnd, shuffle, chance, padrnd, dice as Dice };
+export { rnd, arnd, arnds, nrnd, shuffle, chance, padrnd, successPool, sumPool, dice as Dice };

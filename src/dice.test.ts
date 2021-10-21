@@ -1,4 +1,5 @@
-import { d10, d100, d12, d20, d4, d6, d8, roll, successPool, sumPool } from "./dice";
+import { d10, d100, d12, d20, d4, d6, d8, roll } from "./dice";
+import { successPool, sumPool } from "./utils";
 
 describe("Dice Rollers", () => {
     const repeats = 100;
@@ -111,15 +112,5 @@ describe("Dice Roller", () => {
         const res = roll("6d10");
         const sccs = res.rolls.filter((v) => v >= 6).length;
         expect(successPool(6, res)).toBe(sccs);
-    });
-});
-
-describe("Pool Functions", () => {
-    it("Success pool", () => {
-        expect(successPool(5, [1, 6, 4, 5, 8, 3, 4, 4])).toBe(3);
-    });
-
-    it("Sum pool", () => {
-        expect(sumPool([1, 2, 3, 4])).toBe(10);
     });
 });
